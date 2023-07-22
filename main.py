@@ -37,7 +37,7 @@ def choose_note(note_id):
 def show_notes():
     if note_list:
         print("{:<3} {:<30} {:<20}".format("id", "title", "datetime"))
-        for note in note_list:
+        for note in sorted(note_list, key=lambda x: x.date_time):
             print(note)
     else:
         print("Пока нету никаких записей")
@@ -49,9 +49,9 @@ def save():
 
 def load():
     data = JsonFile.load()
-    print(data)
+    # print(data)
     for note in data:
-        add(note['_Note__note_title'], note['_Note__note_text'], note['_Note__id'], note['_Note__date_time'])
+        add(note['_Note__title'], note['_Note__text'], note['_Note__id'], note['_Note__date_time'])
 
 
 note_list = []
@@ -59,7 +59,7 @@ load()
 is_not_finished = True
 while is_not_finished:
     show_notes()
-    command = input("Введите команду:\n")
+    command = input("Введите команду(add, choose, save, exit):\n")
     match command:
         case "add":
             title = input("Введите заголовок:\n")
