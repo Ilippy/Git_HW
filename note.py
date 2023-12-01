@@ -54,6 +54,6 @@ class Note:
         print(f"Text \n{self.__text}")
 
     def edit(self, title, text):
-        self.title = title
-        self.text = text
+        self.__title = title
+        self.__text = text
         self.__date_time = dt.now().strftime(DATE_TIME_FORMAT)
